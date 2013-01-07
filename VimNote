@@ -1,0 +1,251 @@
+vi filename 打开filename，并将光标置于第一行
+vi -r filename 打开.filename.swp 文件  （restoration）
+vi filename1 filename2 .. 打开多个文件
+
+
+
+
+vi 常用命令总结：
+
+一：光标移动
+
+光标上下左右移动我习惯用 方向键  也有用hljk的，但我不喜欢用这
+w 光标右移一个字至字首(forword) 
+b 光标左移一个字至字首 (back)
+e 光标右移一个字至字尾
+shift+g 移动到 最末一行
+gg 移动到首行
+ngg （或者ng）移动到第n行
+home键  光标移动到当前行首
+end键  光标移动到当前行尾
+：e  foo.txt 在当前vim下打开另一个文件并关闭当前vim  如果当前vim还有未存盘的内容则会失败
+：e！ foo.txt 强制编辑
+
+二：屏幕翻滚
+翻半屏：向文件首：ctrl+u 向文件尾ctrl+d
+翻一屏：向文件首：ctrl+f 向文件尾ctrl+b
+nz 将第n行滚至屏幕中间，不指定n则将光标所在行滚至屏幕中间。
+zz将当前行置于屏幕中间
+zt将当前行置于屏幕顶端
+zb将当前行置于屏幕底端
+三：插入文本
+i 在光标前插入
+i 在行首插入
+a 在行末插入
+a 在光标前插入
+o 在当前行下新开一行插入。
+o 在当前行上新开一行插入。
+ncw 修改指定数目的字符
+cw 修改从当前字符到本词末尾 的字符
+：r filename 将文件filename 插入到当前行之下
+
+四：删除命令
+ndw 同ncw
+dw 同cw
+d+home键  删除至行首
+d+end键 删除至行尾
+ndd 删除当前行及其后n-1行
+x 剪切（或者删除）一个字符
+dd 删除一行
+cc 修改一行
+
+五；搜索及替换
+/pattern  向文件尾搜索pattern
+？pattern向文件首搜索pattern
+n在同一方向重复上次的搜索命令
+n在相反方向重复上次的搜索命令
+:%s/p1/p2/c 将文件中所与p1用p2替换，替换前确认
+:%s/p1//p2 将文件中所有p1用p2替换，替换前不确认 等同于：%s/p1/p2/g前面那个是把g省略了
+:n1,n2 s/p1/p2/c 类似于 ：%s/p1/p2/c   n1 至n2行所有p1用p2替换
+:n1,n2 s/p1/p2 类似于 ：%s/p1/p2
+r 替换命令
+
+六：特殊字符
+.  在命令模式下重复上次的命令
+esc 从插入状态切换到命令状态
+^  匹配字符串位于行首
+$ 匹配字符串位于行尾
+[ ] 用在模式串中,表示指定方位内字符,其中可用-表示一个字 符范围,用^表示不在某个范围内的字符
+*表示任意多个字符 
+
+七：set 选项设置
+set all 列出所有选项设置情况
+set term 设置终端类型
+set number  或者set nu   显示行号
+set nonumber 或者set nonu   不显示行号
+set list (set nolist)  显示制表位^i和行尾标志$
+set  ignorecase 忽略大小写
+set noingnorecaser 不忽略大小写
+set warn 在转到别的文件时，若没保存当前文件则显示nowrite信息
+set terse 显示简短的警告信息
+set nowrapscan  禁止在搜索到达文件两端时，又从另一端开始
+set wrapscan 开启wrapscan
+
+
+八：行方式命令
+：w 保存当前文件
+：n1,n2 filename 将n1行到n2行之间的内容保存到文件filename中去
+：e filename 打开文件进行编辑
+：x 保存当前文件并退出
+：q 退出不保存
+：q! 强制退出不保存
+：！command 执行shell命令command
+：n1，n2 w! command 将文件n1行到n2行的内容作为command的输入并执行
+：r! command 将命令command 的输出结果放到当前行
+
+
+九：寄存操作
+nyy  将当前行及其下n行的内容保存到一号寄存器中
+p 将一号寄存器中的内容粘贴到当前行下
+：map key  commandlist 将一系列的操作用key操作来代替
+例如：map uc o c 在光标当前行上插入c
+
+
+
+
+随笔：
+set compatible vim 兼容模式
+set nocompatible 非vim兼容模式
+set showmode 显示所处的工作模式
+set noshowmode 不显示所处的工作模式
+h 左 l右k上j下
+j 将两行合并
+u 撤销操作
+ctrl+r反转撤销
+要善于使用n+command命令
+eg:3akong<esc> 3k   3x
+zz保存当前文件并退出
+:e!放弃所有修改重新载入该文件的原始内容
+fk在当前行上查找下一个字符k
+%匹配括号
+:set ruler 显示光标所在的行列
+:set noruler 不显示光标所在的行列
+* 将光标置于word上则此命令类似于/*
+/\ruler<\>只匹配单词ruler
+:set hlsearch 高亮显示匹配结果
+:set nohlsearch 不高亮显示匹配结果
+:nohlsearch 只关闭当前的高亮显示
+:set hlsearch? 你懂的  推广：set command?
+:set incsearch 在输入要搜索的字符时vim就已经开始了搜索 
+:set noincsearch 关闭incsearch
+:scriptnames  vim配置文件位置
+`` 跳回到你刚才的出发点
+ctrl+o 类似``但可以多次跳转
+光标改变即为一个跳转（当然也有例外）
+jumps 列出你曾经跳转过的位置的列表
+ma 将当前光标下的位置命名为a `a 则跳转到1处
+dw和cw区别 dw不进入insert工作模式  cw进入insert工作模式
+d+跳转命令  eg:d + shift+g 你懂的
+此类命令有一个固定的模式：操作符号+位移命令
+进入visual模式然后选择然后x  c d 你懂的
+v+shift+g  visual模式也可以用操作符+位移命令
+ctrl+v 以矩形的文本块为对象进行操作，编辑表格时就排上用场了 哈哈
+小技巧 teh 进入normal模式 然后将光标置于e处然后输入命令： x p
+daw中的d还是操作符命令. aw是一个文本对象. 提示: aw意 为A Word. 这样daw的完整意思是"Delete A Word", 更准确地说,该Word之后的空白字符也被删除了(即位于行末尾的单词之前的空白).
+R命令会让Vim进入replace模式. 在此模式下, 每个键入的字符都 会替换掉当前光标下的字符. 直到你键入<Esc>结束该模式1
+replace模式下的例外是按下回车键并不会把当前字符替换为回车, 而是插 入一个回车
+vimrc文件可以包含任何你可以 在冒号命令行上使用的命令
+:map"命令(不带参数)会列出当前已定义的映射. 它至少会包括定义在Normal 模式下的映射
+
+Vim的功能可以通过向它添加plugin得以扩展. 所谓plugin不过是一 个Vim会自动载入执行的脚本. 把一个脚本放入你的plugin目录就可以 了, 非常容易.
+
+
+plugin基本上分为两类: 全局的: 用于所有文件 专用于某类型文件的:
+只用于特定类型的一类文件
+
+:filetype plugin on 开启相应文件类型的plugin
+
+文件类型plugin的文件名一般形式是:
+ftplugin/<filetype>.vim
+ftplugin/<filetype>_<name>.vim
+ftplugin/<filetype>/<name>.vim
+
+万一你把一个选项值改到不可收拾的境地, 还可以在该选项的后面放
+一个&符号使它恢复其默认值, 如:
+:set iskeyword&
+
+要察看$VIMRUNTIME的值方法：打开vim编辑器 然后执行命令 ! echo $VIMRUNTIME 因为VIM知道他的值
+
+:args 察看整个列表中有哪些文件
+：n 跳转到下一个文件
+:args five.c six.c seven.h 打开另一个文件列表，没有存盘同样会失败
+：args！ five.c six.c seven.h 强制执行
+
+注意：使用ctrl+^并不会改变你在文件列表中的位置只有：next和：previous会改变
+
+
+
+目前为止我们用的标记还都是以小写字母命名的. 还有一种以大写
+字母命名的标记. 它们是全局标记, 它们可以用在任何文件中. 比如假
+设我们正编辑"foo.txt". 到文件的半中间("50%")处设置一个名为F的标
+记(F意为foo):
+50%mF
+现在转而编辑"bar.txt"并在其最后一行设置一个名为B(B意为bar)的
+标记:
+GmB
+现在你可以用" ́F"命令跳转到文件foo.txt的半中间.  个文件, " ́B"命令会再把你带回文件bar.txt的最后一行.  或者编辑另一
+
+
+:marks a 察看标记a的意思
+
+:w >foo.txt  将当前文件中的内容写入文件foo.txt中 有则覆盖无则创建
+：w >> foo.txt 追加到foo.txt中
+如果希望只希望追加选定的行  则进入visual模式 然后再执行命令你懂的
+
+vim -R 	foo.txt 以只读方式打开文件foo.txt 可以加！进行强制修改
+vi -M foo.txt 坚决不允许改变foo.txt  即使加！也不行
+
+:w kong 将当前文件保存为kong   类似于save as kong
+
+:file move.c 修改正在编辑的文件名为move.c
+
+窗口：
+:split 将当前窗口一分为二
+:close 关闭当前窗口
+:only 只保留当前窗口其他全关闭
+:split two.c 打开文件two.c并打开新窗口显示他
+:new 打开个新窗口
+:vsplit 垂直分割窗口
+ctrl+w +方向键切换窗口
+:qall 退出所有窗口
+:wall 写入所有窗口
+:wqall 退出并保存所有窗口
+:qall!
+vi -o one.txt two.txt three.txt
+1)gf用来打开光标下的文件.
+
+2)path用于指定搜索文件的路径
+
+ 
+
+ 举例: 假设我的源码放在isd_qzoneappbase_proj路径下, 如下方法设置path即可.
+
+ set path=.,/usr/include, 
+
+ set path+=/data/home/nemo/code/isd_qzoneappbase_proj/**
+
+ 首先把当前路径和系统头文件路径设在path路径下,然后再把源码的路径设置进去
+
+
+打开文件时，回到上次对该文件的最后编辑的位置 （非常高效）
+
+`" 回到你离开文件时光标所在的位置。 比如我上次编辑了applist_select.cgi下次可以通过这种方法重新回到最后查看过的位置
+
+`. 回到你离开文件是最后改动的位置。
+
+
+
+在 Vim 中指定文件类型
+起因
+最近在修改一个很老的项目，既然是修改，必定是在原有的文件上面进行的，嵌套后的文件都是以 vm 为扩展名的（JAVA？），用 Vim 打开后不仅语法高亮没有像 HTML 那样漂亮，就连 matchit 用%在标签之间切换也失效，用 snipMate 管理的代码片段也无法使用了。
+
+解决方案
+使用以下指令：
+
+set filetype=html
+不过每次打开文件再输入指令非常麻烦，可以在 vimrc 中加入：
+
+autocmd BufRead,BufNewFile *.vm set filetype=html
+
+
+自动缩进为4个空格set shiftwidth=4

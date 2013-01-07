@@ -1,0 +1,364 @@
+快捷键盘
+文件操作:
+C-x C-f: 打开一个新文件
+C-x C-v 读入一个文件替换掉用C-x C-f打开的文件
+C-x i 把文件插入到光标的当前位置
+C-x C-s :保存文件
+C-x C-c :退出
+C-x C-w :另存为
+    
+C-a : 光标移动到一行的开始
+C-e : 光标移动到一行的结尾
+M->: 跳至文件尾
+M-<: 跳至文件头
+
+M-g g : 跳转行
+C-x k : 删除缓冲区
+C-x b :打开缓冲区
+C-x C-q : 将缓冲区换成只读
+C-x C-q :交替只读或可读
+C-x 2 :将窗口平分为2
+C-x 3: 将窗口竖着平分为2
+
+
+
+C-x ^ :加高当前窗口
+C-x } :加宽当前窗口
+
+C-~ :标记文本块
+M-w :复制所选择的文本块
+C-x C-x :交换插入点和文本标记的位置
+C-w :删除文本块
+C-y :粘贴文本块
+C-t :交换2个字符的位置,将要光标放在要交换的字符处
+M-t :交换2个单词的位置
+
+拷贝一行的方法：
+C-a, C-~, C-e, C-n, C-y
+
+M-u :将光标放在要修改的单词前面,然后执行该命令
+M-l :同上,将单词转换为小写
+
+M-c :将光标放在第一个字符处,然后执行此命令,则会将改单词第一个字母大写
+如果发现刚输入的单词有错误,可以在以上几个命令的前面加上M--,则只会对单词的前半部分进行修改
+Emacs 会在第一次保存某个备份文件的时候创建一个备份文件
+C-g : 放弃当前命令
+#filename# :自动保存的文件名
+
+查找和替换
+查找
+C-r :向前查找
+C-s :向后查找
+C-s C-w :把光标位置处的字符串用作查询字符串
+C-s C-y :把光标位置到行尾之间的字符串用作查询字符串
+C-s C-s :重复刚才的查询操作
+
+替换
+M-x replace-string RETURN 再输入要查找的字符串 按下回车然后输入替换的字符串(查找&替换全部)
+
+M-% 输入需要替换的string然后按回车再按将要替换的string再按回车,然后按空格或者y 进行单个替换
+C-x ESC ESC :会调出最后一次执行的命令
+C-p :察看前一条命令
+
+怎样区分大小写: 
+变量case-fold-search决定查找操作是否区分大小写
+set variable只能临时的改变emacs的行为
+怎样设置case-fold-search呢
+M-x :set-variable RETURN case-fold-search RETURN nil(nil: 区分大小写. on: 不区分大小写)
+
+^word$做一次正则表达式查找,查找的是独占一个文本行的单词
+M-x ispell-buffer RETURN :拼写检查,按空格跳过此检查处,如果再次遇到这个单词而它确实拼写正确,则键入i,将它插入数据字典中
+
+C-s M-p :查询刚才查询过的单词
+
+
+缓冲区和窗口:
+C-b : 可以创建一个新的编辑缓冲区或者打开一个已经存在的编辑缓冲区
+C-b RETURN :立即进入上一此的缓冲区,当然前提是没有进行任何操作
+M-x rename-buffer :重新命名编辑缓冲区
+
+当编辑多个缓冲区时,
+C-x s :emacs 会依次询问是否保存每个缓冲区,回答y保存,n不保存, !键将无条件保存所有编辑缓冲区
+如果只想保存当前编辑缓冲区,键入 .
+
+C-r, 将编辑缓冲区变为只读
+
+C-x k :删除编辑缓冲区
+
+C-x C-q : 将编辑缓冲区变为只读
+
+编辑只读权限的文件方法:
+C-x C-w ,将文件另存一份,C-x C-q : 将文件变为可写
+
+复制块方法:
+M-~, M-w,M-y
+
+窗口操作:
+C-x 2 :上下排列窗口
+C-x 3 :垂直分割窗口
+emacs dic int :emacs将把这2个文件分别显示在2个水平的穿口中
+
+C-x <左推当前文本
+C-x >右推当前文本
+
+M-n C-x o :沿顺时针方向依次移动n个窗口
+
+2个窗口分别打开2个文件,从一个文件拷贝一行到另一个文件方法:
+C-k, C-x o,M<,C-y RETURN
+
+C-x 0: 删除所在的窗口,C-x 1: 删除其他窗口
+C-x ^上下加大当前缓冲区, C-x }加宽当前缓冲区
+C-u C-x ^ 大步上下加大当前缓冲区
+
+C-x - :将窗口缩到缓冲区的大小
+C-x + :使所有缓冲区窗口变成同样大小
+
+M C-v :卷动下一个窗口的内容
+C-x 4 f :在另一个窗口中打开一个文件,若没有窗口则会自动创建一个
+C-x 4 b :..................另一个编辑缓冲区
+
+C-x r m :设定书签 (注意:可以在别的文件中进行操作)
+C-x r b :回到书签的位置,可以输入前几个名字然后按下TAB键
+M-x bookmark-rename :书签重命名
+M-x bookmark-delete :删除书签
+
+对书签进行操作:
+C-x r l :进入书签操作界面
+进入之后:
+d 给书签加上待删除标志
+x 删除书签
+s 保存书签
+v emacs会把标记过的书签都打开在多窗口中
+m 给书签加上待显示标记
+如果只想进入一个带书签的文件,可以直接键入v 而不用给书签加上待显示标记
+
+与书签有关的其他操作:
+M-x bookmark-insert :把书签标记的文本插如到当前光标处
+
+
+emacs工作环境
+M ! :执行一条shell命令 (配合C-x 1 关闭此窗口),输出结果放在*shell command output* 编辑缓冲区中
+
+emacs shell 很有意思的功能
+例如对
+3
+2
+1
+进行排序,操作顺序:
+M-h M-| 输入命令sort RETURN
+
+C-u M-!  直接将shell输出结果放在当前缓冲区 而不是放在*shell command output*中
+
+M-x send-invisible :口令字符串不会显示
+C-c C-z :shell模式中挂起程序
+M-p 检索前一个命令
+M-n 检索后一个命令
+
+shell mode下的命令:
+C-c C-c :中断当前作业
+C-c C-d :送出EOF
+C-c C-o 删除最后一条命令的输出
+C-c C-z 挂起程序
+C-c C-r 将输出命令的第一行放到穿口顶部
+C-c C-e 将输出内容的最后一行放在窗口的底部,技巧可以将光标直接移动到最后一行的shell提示符末尾
+C-c C-p 移动到前一条命令
+C-c C-n 移动到下一条命令
+
+M-p :检索前一个命令
+M-n :检索下一个命令
+
+C-x d 进入目录编辑模式
+
+
+日历和时间相关:
+M-x display-time :显示时间
+M-x calendar :显示日历
+iy 
+iw
+id 在管表处的日期处插入日记条目
+d 显示在光标处的日记条目
+s 显示整个日记条目
+pd 显示今天是本年度的第几天
+q 退出日历功能
+a 显示日历画面中的3个月里的节日情况
+h 显示今天的节假日
+m 突出显示日记条目
+
+
+
+Emacs计算器
+C-x * c :进入计算器
+
+进入emacs mode " 会进入代数运算模式
+技巧:1 RETURN 2 RETURN 3 RETURN + RETURN + RETURN可以连续进行相加
+
+阅读技巧:
+emcas file 后进入mode
+view-mode ->test-mode 或者其他
+view-mode基本操作:
+u 上翻半屏
+d 下翻半屏
+spcace 下翻一翻
+
+显示行号技巧:
+先进入主模式:c-mode 然后再进入非主模式linum-mode 这样主模式和非主模式就都会生效
+但如果先进入非主模式后进入主模式 则非主模式就会失效
+
+emacs下浏览网页
+1. cvs -d :pserver:anonymous@cvs.namazu.org:/storage/cvsroot co emacs-w3m
+2. cd emacs-w3m
+3. autoconf
+4. ./configure --prefix=/usr/local/src/emacs_plugins/emacs-w3m-1.4.4/
+5. 进入emacs 输入M-x w3m即可
+
+
+
+
+emacs  org-mode学习
+--------------------------
+* org-mode
+** 大纲
+
+正在编写大纲
+
+** 轻量级标题预言
+* 可以导出其他格式
+
+注意：
+1. * 要位于每行的行首
+2. * 之后要有一个空格，然后再输入标题
+3. 连续几个*就表示是几级大纲， 最多支持10级
+TAB 循环切换光标所在大纲的状态， （三种状态：折叠，打开下一级，打开全部）
+C-c *：将本行设置为标题
+
+默认的大纲显示没有缩进，显得有些乱， 可以用M-x org-indent-mode切换到另一种显示方式
+如果想让某个文件默认用这种方式打开， 可以在文件头部增加：#+STARTUP: indent
+如果希望打开所有org文件都默用这种方式打开，可在emacs中配置
+
+org-mode 创建 衔接：
+http://www.astro.uva.nl/~dominik            on the web
+file:/home/dominik/images/jupiter.jpg       file, absolute path
+
+对于文件衔接可以用::后面增加定位符的方式链接到文件的特定位置。定位符可以是行号或搜索选项。如：
+file:~/code/main.c::255                     进入到 255 行
+file:~/xx.org::My Target                    找到目标‘<<My Target>>’
+file:~/xx.org/::#my-custom-id               查找自定义 id 的项
+
+除了上述的自动衔接外， 还可以显示制定衔接，采用如下格式：
+[[lin][a]][description]
+[[link
+
+]]
+C-c C-l:创建或者修改衔接，可以引用已保存的衔接
+C-c C-o打开衔接
+
+[[my-anchor[内部衔接]]]
+[[fn:footprint1[脚注1]]]
+显示图片（略）
+** 轻量级标记语言
+前面的大纲和衔接都是使用标记来定义的。
+比如github的README文档除了支持纯文本外，还支持丰富的轻量级标记语言，其中就包括Org.
+
+*粗体*
+/斜体/
+
++删除线+
+—下划线_
+下标：H_2 0
+上标： E=mc^2
+等宽字: =git= 或者~git~
+
+Org 能够很容易地处理 ASCII 文本表格。任何以‘|’为首个非空字符的行都会被认为是表格的一部分| Name  | Pone | Age |
+|-------+------+----|
+| Peter | 1234 | 17 |
+| Anna  | 4321 | S  |
+| A     |    A | A  |
+| A     |    A | A  |
+|-------+------+----|
+|       |      |    |
+
+
+你可能认为录入这样的表格很繁琐，实际上你只需要书人员表头“|Name|Pone|Age”之后，按C-c RET就可以生成整个表格的结构，类似的快捷键还有
+很多
+C-c C-c 调整表格，不移动光标
+TAB 移动到下一区域，必要时新建一行
+S-TAB 移动到上一区域
+RET 移动到先一行，必要时新建一行
+
+快捷键命令说明
+M-LEFT/RIGHT   移动列
+M-UP/DOWN   移动行
+M-S-LEFT/RIGHT   删除/插入列
+M-S-UP/DOWN   删除/插入行
+C-c -   添加水平分割线
+C-c RET   添加水平分割线并跳到下一行
+C-c ^   根据当前列排序，可以选择排序方式
+
+* 3.3 段落
+对于单个回车换行的文本，认为其属于同一个段落。在导出的时候将会转化为不换行的同一段。如果要新起一个段落，需要留出一个空行。 这点与MediaWiki类似。
+3.4 列表
+
+Org 能够识别有序列表、无序列表和描述列表。
+
+    无序列表项以‘-’、‘+’或者‘*‘开头。
+    有序列表项以‘1.’或者‘1)’开头。
+    描述列表用‘::’将项和描述分开。
+    有序列表和无序列表都以缩进表示层级。只要对齐缩进，不管是换行还是分块都认为是处于当前列表项。
+
+同一列表中的项的第一行必须缩进相同程度。当下一行的缩进与列表项的的开头的符号或者数字相同或者更小时，这一项就结束了。当所有的项都关上时，或者后面有两个空行 时，列表就结束了。例如：
+
+      My favorite scenes are (in this order)
+      1. The attack of the Rohirrim
+      2. Eowyn's fight with the witch king
+          + this was already my favorite scene in the book
+          + I really like Miranda Otto.
+      Important actors in this film are:
+      - Elijah Wood :: He plays Frodo
+      - Sean Austin :: He plays Sam, Frodo's friend.
+
+将显示为：
+
+    My favorite scenes are (in this order)
+
+        The attack of the Rohirrim
+        Eowyn's fight with the witch king
+            this was already my favorite scene in the book
+            I really like Miranda Otto.
+
+    Important actors in this film are:
+
+    Elijah Wood
+        He plays Frodo
+    Sean Austin
+        He plays Sam, Frodo's friend.
+
+
+3.4.1 列表操作快捷键
+
+为了便利，org-mode也支持很多列表操作的快捷键，大部分都与大纲的快捷键类似：
+快捷键命令说明
+TAB   折叠列表项
+M-RET   插入项
+M-S-RET   插入带复选框的项
+M-S-UP/DOWN   移动列表项
+M-LEFT/RIGHT   升/降级列表项，不包括子项
+M-S-LEFT/RIGTH   升/降级列表项，包括子项
+C-c C-c   改变复选框状态
+C-c -   更换列表标记（循环切换）
+
+
+3.5 分隔线
+
+五条短线或以上显示为分隔线。
+
+-----
+
+
+跟特留尼西特握手                    :苦差:薪水:逃不掉:
+
+
+
+
+
+
+
